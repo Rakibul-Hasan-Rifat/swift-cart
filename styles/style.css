@@ -5,3 +5,10 @@
     background-position: center;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.99), rgba(0, 0, 0, 0.5)), url(../assets/images/banner-image.png);
 }
+
+.active {
+    background-color: #422ad552;
+    color: #422ad5;
+    font-weight: 600;
+    border-radius: 4px;
+}
