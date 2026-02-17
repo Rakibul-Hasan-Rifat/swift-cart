@@ -102,9 +102,11 @@ const showProducts = (products) => {
 const toggleActiveLink = () => {
     const links = document.querySelectorAll('.navbar li a');
     links.forEach(link => {
+        console.log(`/swift-cart/${link.getAttribute('href')}`, location.pathname);
         console.log(`/swift-cart${link.getAttribute('href')}`, location.pathname);
-        if (link.getAttribute('href') === location.pathname ) {
-            console.log(window.location.pathname === link.getAttribute('href').slice(1));
+        console.log(`/swift-cart${link.getAttribute('href')?.slice(1)}`, location.pathname);
+        if (`/swift-cart/${link.getAttribute('href')}` === location.pathname ) {
+            console.log(location.pathname === link.getAttribute('href').slice(1));
             link.parentElement.classList.add('active');
         } else {
             link.parentElement.classList.remove('active');
