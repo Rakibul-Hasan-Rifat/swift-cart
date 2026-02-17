@@ -13,6 +13,34 @@ const getProducts = async (category = 'all') => {
     showProducts(products);
 };
 
+const getProductDetails = async (id) => {
+    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+    const product = await response.json();
+
+    const { title, price, image, rating, category, description } = product;
+
+    const detailsElement = document.getElementById(`product-details-${id}`);
+
+    detailsElement.innerHTML = `
+    <div class="modal-box">
+        <figure class="bg-gray-200 flex items-center justify-center">
+            <img src="${image}" class="h-auto min-h-48 md:max-h-56 w-3/4 object-contain" alt="Bagpack" />
+        </figure>
+        <h3 class="font-bold text-lg mt-4">${title}</h3>
+        <p class="py-4">Price: $${price}</p>
+        <p class="py-4">Category: ${category}</p>
+        <p class="py-4">Rating: ${rating.rate} (${rating.count})</p>
+        <p class="py-4">Description: ${description}</p>
+        <div class="modal-action">
+            <button class="btn" onclick="document.getElementById('product-details-${id}').close()">Close</button>
+        </div>
+    </div>
+    `;
+
+    document.getElementById(`product-details-${id}`).showModal();
+
+}
+
 const showCategories = (categories) => {
     categories.unshift('all');
     console.log('Categories:', categories);
@@ -52,7 +80,7 @@ const showProducts = (products) => {
                         </h4>
                         <h2 class="text-2xl font-bold">$${price}</h2>
                         <div class="card-actions justify-between items-center">
-                            <button class="btn btn-sm flex gap-1 items-center">
+                            <button class="btn btn-sm flex gap-1 items-center" onclick="getProductDetails(${product.id})">
                                 <img src="./assets/icons/eye.png" alt="eye-icon" class="w-4 h-4">
                                 <span>View Details</span>
                             </button>
@@ -62,6 +90,9 @@ const showProducts = (products) => {
                             </button>
                         </div>
                     </div>
+                    <dialog id="product-details-${product.id}" class="modal modal-bottom sm:modal-middle">
+                        
+                    </dialog>
                 </div>
         `;
         parentElement.innerHTML += newElement;
