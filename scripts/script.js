@@ -100,9 +100,10 @@ const showProducts = (products) => {
 }
 
 const toggleActiveLink = () => {
-    const links = document.querySelectorAll('.navbar a');
+    const links = document.querySelectorAll('.navbar li a');
     links.forEach(link => {
-        if (link.getAttribute('href').slice(1) === `.${window.location.pathname}` ) {
+        console.log(link.getAttribute('href'), location.pathname);
+        if (link.getAttribute('href') === location.pathname ) {
             console.log(window.location.pathname === link.getAttribute('href').slice(1));
             link.parentElement.classList.add('active');
         } else {
